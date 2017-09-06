@@ -15,17 +15,17 @@ var (
 
 func main() {
 	// create the template
-	createtemplate(templatepath)
+	createtemplate(templatepath, templatecontents)
 
 	// create the file from the parsed template
 	parse(templatepath, newfilepath)
 
 }
 
-func createtemplate(createtemplatepath string) {
+func createtemplate(createtemplatepath, createtemplatecontents string) {
 	// create the template
-	f, _ := os.Create(templatepath)
-	f.Write([]byte(templatecontents))
+	f, _ := os.Create(createtemplatepath)
+	f.Write([]byte(createtemplatecontents))
 	f.Close()
 }
 
@@ -55,7 +55,7 @@ func parse(parsedtemplate, resultingfile string) {
 	}
 
 	fmt.Println("Template and Resultingfile produced:")
-	fmt.Printf("%v and %v were created \n", templatepath, newfilepath)
+	fmt.Printf("%v and %v were created \n", parsedtemplate, resultingfile)
 
 	// Uncomment to have the stdout (the contents of the newfile) on your console
 	// fnew, _ := os.Open(resultingfile)

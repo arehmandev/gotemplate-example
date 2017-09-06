@@ -29,7 +29,7 @@ func TestGoTemplate(t *testing.T) {
 		t.Run(c.name, func(t *testing.T) {
 
 			// create the template
-			createtemplate(templatepath)
+			createtemplate(templatepath, templatecontents)
 
 			// create the file from the parsed template
 			parse(templatepath, newfilepath)
