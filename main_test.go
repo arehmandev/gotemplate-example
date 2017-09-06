@@ -18,9 +18,9 @@ func TestGoTemplate(t *testing.T) {
 	}{
 		{
 			name:                  "Test for ensuring template and resulting file are created",
-			template:              "example.css.template",
-			templatefilecontents:  "The text color is {{.textColor}} and the link color is {{.linkColorHover}}",
-			resultantfile:         "example.css",
+			template:              templatepath,
+			templatefilecontents:  templatecontents,
+			resultantfile:         newfilepath,
 			resultantfilecontents: "The text color is #abcdef and the link color is #ffaacc",
 		},
 	}
