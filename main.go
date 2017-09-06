@@ -8,8 +8,9 @@ import (
 )
 
 var (
-	templatepath = "example.css.template"
-	newfilepath  = "example.css"
+	templatepath     = "example.css.template"
+	templatecontents = "The text color is {{.textColor}} and the link color is {{.linkColorHover}}"
+	newfilepath      = "example.css"
 )
 
 func main() {
@@ -24,7 +25,7 @@ func main() {
 func createtemplate(createtemplatepath string) {
 	// create the template
 	f, _ := os.Create(templatepath)
-	f.Write([]byte("The text color is {{.textColor}} and the link color is {{.linkColorHover}}"))
+	f.Write([]byte(templatecontents))
 	f.Close()
 }
 
