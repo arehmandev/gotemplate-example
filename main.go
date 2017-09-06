@@ -1,8 +1,8 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
-	"io"
 	"log"
 	"os"
 )
@@ -54,7 +54,10 @@ func parse(parsedtemplate, resultingfile string) {
 		return
 	}
 
-	fnew, _ := os.Open(resultingfile)
-	io.Copy(os.Stdout, fnew)
-	f.Close()
+	fmt.Println("Template and Resultingfile produced:")
+	fmt.Printf("%v and %v were created \n", templatepath, newfilepath)
+	// Uncomment to have the stdout on your console
+	// fnew, _ := os.Open(resultingfile)
+	// io.Copy(os.Stdout, fnew)
+	// f.Close()
 }
