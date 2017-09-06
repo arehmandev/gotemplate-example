@@ -56,7 +56,8 @@ func parse(parsedtemplate, resultingfile string) {
 
 	fmt.Println("Template and Resultingfile produced:")
 	fmt.Printf("%v and %v were created \n", templatepath, newfilepath)
-	// Uncomment to have the stdout on your console
+
+	// Uncomment to have the stdout (the contents of the newfile) on your console
 	// fnew, _ := os.Open(resultingfile)
 	// io.Copy(os.Stdout, fnew)
 	// f.Close()
