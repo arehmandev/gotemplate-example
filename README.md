@@ -1,7 +1,9 @@
-#Example for using Gotemplate
+# Example for using Gotemplate
 
 Hi this is just a tiny piece of code for using gotemplate - hope its useful to somebody
 
-go build
+```
+1. go build
 
-./gotemplate-example
+2. ./gotemplate-example
+```
