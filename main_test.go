@@ -1,20 +1,27 @@
 package main
 
 import (
+	"fmt"
+	"io/ioutil"
 	"os"
+	"strings"
 	"testing"
 )
 
 func TestGoTemplate(t *testing.T) {
 	cases := []struct {
-		name          string
-		template      string
-		resultantfile string
+		name                  string
+		template              string
+		templatefilecontents  string
+		resultantfile         string
+		resultantfilecontents string
 	}{
 		{
-			name:          "Test for ensuring template and resulting file are created",
-			template:      "example.css.template",
-			resultantfile: "example.css",
+			name:                  "Test for ensuring template and resulting file are created",
+			template:              "example.css.template",
+			templatefilecontents:  "The text color is {{.textColor}} and the link color is {{.linkColorHover}}",
+			resultantfile:         "example.css",
+			resultantfilecontents: "The text color is #abcdef and the link color is #ffaacc",
 		},
 	}
 
@@ -37,6 +44,30 @@ func TestGoTemplate(t *testing.T) {
 			os.IsNotExist(err)
 			if err != nil {
 				panic(err)
+			}
+
+			// Check the contents of both files is correct
+
+			//templatefilecontents
+			b1, err := ioutil.ReadFile(c.template)
+			if err != nil {
+				fmt.Print(err)
+			}
+
+			result1 := strings.Replace(string(c.templatefilecontents), "\u00a0", " ", -1)
+			if string(b1) != result1 {
+				t.Errorf("got: %#v\nwant: %#v\n", string(b1), result1)
+			}
+
+			//resultantfilecontents
+			b2, err := ioutil.ReadFile(c.resultantfile)
+			if err != nil {
+				fmt.Print(err)
+			}
+
+			result2 := strings.Replace(string(c.resultantfilecontents), "\u00a0", " ", -1)
+			if string(b2) != result2 {
+				t.Errorf("got: %#v\nwant: %#v\n", string(b2), result2)
 			}
 
 			// Delete each file after running test
