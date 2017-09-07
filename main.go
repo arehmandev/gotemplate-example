@@ -13,6 +13,7 @@ var (
 	templatepath     = "example.css.template"
 	templatecontents = "The text color is {{.textColor}} and the link color is {{.linkColorHover}}. Nestedkey: {{.testkey.testkeynested}}. Nested array: {{index .testkey.testkeylist 0}}"
 	newfilepath      = "example.css"
+	variablesfile    = "config.yml"
 )
 
 func main() {
@@ -21,7 +22,7 @@ func main() {
 	createtemplate(templatepath, templatecontents)
 
 	// create the file from the parsed template
-	parse(templatepath, newfilepath)
+	parse(templatepath, newfilepath, variablesfile)
 
 }
 
@@ -32,7 +33,7 @@ func createtemplate(createtemplatepath, createtemplatecontents string) {
 	f.Close()
 }
 
-func parse(parsedtemplate, resultingfile string) {
+func parse(parsedtemplate, resultingfile, configfile string) {
 	t, err := template.ParseFiles(parsedtemplate)
 	if err != nil {
 		log.Println("parsing file error", err)
@@ -46,7 +47,7 @@ func parse(parsedtemplate, resultingfile string) {
 	}
 
 	// Taking yaml values from file, thanks helm packages!
-	readvalues, err := chartutil.ReadValuesFile("config.yml")
+	readvalues, err := chartutil.ReadValuesFile(configfile)
 	if err != nil {
 		log.Print("executing template error: ", err)
 		return

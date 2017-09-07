@@ -32,7 +32,7 @@ func TestGoTemplate(t *testing.T) {
 			createtemplate(templatepath, templatecontents)
 
 			// create the file from the parsed template
-			parse(templatepath, newfilepath)
+			parse(templatepath, newfilepath, variablesfile)
 
 			// Check both files were created
 			_, err := os.Stat(c.template)
