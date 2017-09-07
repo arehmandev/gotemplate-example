@@ -55,7 +55,7 @@ func parse(parsedtemplate, resultingfile, configfile string) {
 
 	config := readvalues.AsMap()
 
-	// fmt.Print(config.AsMap())
+	// fmt.Println(config.AsMap()) // uncomment to see the values printed as a map
 
 	err = t.Execute(f, config)
 	if err != nil {
@@ -73,19 +73,3 @@ func parse(parsedtemplate, resultingfile, configfile string) {
 	// io.Copy(os.Stdout, fnew)
 	// f.Close()
 }
-
-// func readValuesFile(filename string) (values, error) {
-// 	data, err := ioutil.ReadFile(filename)
-// 	if err != nil {
-// 		return map[string]interface{}{}, err
-// 	}
-// 	return readValues(data)
-// }
-//
-// func readValues(data []byte) (vals values, err error) {
-// 	err = yaml.Unmarshal(data, &vals)
-// 	if len(vals) == 0 {
-// 		vals = values{}
-// 	}
-// 	return
-// }
