@@ -12,7 +12,7 @@ import (
 
 var (
 	templatepath     = "example.css.template"
-	templatecontents = "The text color is {{.textColor}} and the link color is {{.linkColorHover}}"
+	templatecontents = "The text color is {{.textColor}} and the link color is {{.linkColorHover}} {{.testkey.testkeynested}}"
 	newfilepath      = "example.css"
 )
 
