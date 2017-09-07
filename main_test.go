@@ -21,7 +21,7 @@ func TestGoTemplate(t *testing.T) {
 			template:              templatepath,
 			templatefilecontents:  templatecontents,
 			resultantfile:         newfilepath,
-			resultantfilecontents: "The text color is #abcdef and the link color is #ffaacc testvalue",
+			resultantfilecontents: "The text color is #abcdef and the link color is #ffaacc. Nestedkey: testnested. Nested array: testvalue",
 		},
 	}
 

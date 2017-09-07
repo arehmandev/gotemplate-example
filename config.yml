@@ -1,4 +1,7 @@
 textColor: "#abcdef"
 linkColorHover: "#ffaacc"
 testkey:
-    testkeynested: "testvalue"
+    testkeynested: "testnested"
+    testkeylist:
+      - testvalue
+      - testvalue2

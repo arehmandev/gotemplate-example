@@ -11,7 +11,7 @@ import (
 
 var (
 	templatepath     = "example.css.template"
-	templatecontents = "The text color is {{.textColor}} and the link color is {{.linkColorHover}} {{.testkey.testkeynested}}"
+	templatecontents = "The text color is {{.textColor}} and the link color is {{.linkColorHover}}. Nestedkey: {{.testkey.testkeynested}}. Nested array: {{index .testkey.testkeylist 0}}"
 	newfilepath      = "example.css"
 )
 
@@ -46,11 +46,15 @@ func parse(parsedtemplate, resultingfile string) {
 	}
 
 	// Taking yaml values from file, thanks helm packages!
-	config, err := chartutil.ReadValuesFile("config.yml")
+	readvalues, err := chartutil.ReadValuesFile("config.yml")
 	if err != nil {
 		log.Print("executing template error: ", err)
 		return
 	}
+
+	config := readvalues.AsMap()
+
+	// fmt.Print(config.AsMap())
 
 	err = t.Execute(f, config)
 	if err != nil {
