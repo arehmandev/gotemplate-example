@@ -2,12 +2,11 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"text/template"
 
-	yaml "gopkg.in/yaml.v2"
+	"k8s.io/helm/pkg/chartutil"
 )
 
 var (
@@ -16,9 +15,8 @@ var (
 	newfilepath      = "example.css"
 )
 
-type values map[string]interface{}
-
 func main() {
+
 	// create the template
 	createtemplate(templatepath, templatecontents)
 
@@ -47,8 +45,8 @@ func parse(parsedtemplate, resultingfile string) {
 		return
 	}
 
-	// A sample config
-	config, err := readValuesFile("config.yml")
+	// Taking yaml values from file, thanks helm packages!
+	config, err := chartutil.ReadValuesFile("config.yml")
 	if err != nil {
 		log.Print("executing template error: ", err)
 		return
@@ -71,18 +69,18 @@ func parse(parsedtemplate, resultingfile string) {
 	// f.Close()
 }
 
-func readValuesFile(filename string) (values, error) {
-	data, err := ioutil.ReadFile(filename)
-	if err != nil {
-		return map[string]interface{}{}, err
-	}
-	return readValues(data)
-}
-
-func readValues(data []byte) (vals values, err error) {
-	err = yaml.Unmarshal(data, &vals)
-	if len(vals) == 0 {
-		vals = values{}
-	}
-	return
-}
+// func readValuesFile(filename string) (values, error) {
+// 	data, err := ioutil.ReadFile(filename)
+// 	if err != nil {
+// 		return map[string]interface{}{}, err
+// 	}
+// 	return readValues(data)
+// }
+//
+// func readValues(data []byte) (vals values, err error) {
+// 	err = yaml.Unmarshal(data, &vals)
+// 	if len(vals) == 0 {
+// 		vals = values{}
+// 	}
+// 	return
+// }
